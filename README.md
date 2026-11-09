@@ -268,6 +268,20 @@ ruff check . && ruff format --check .
 * Quality feedback in the online replay is RouterBench's ground-truth score, delivered with delay
   or dropped. Real user feedback is noisier and biased.
 
+## Citing
+
+If you use DACR, please cite it via [CITATION.cff](CITATION.cff) (GitHub's "Cite this repository" button), or:
+
+```bibtex
+@software{dogani2026dacr,
+  author  = {Dogani, Javad},
+  title   = {Domain-Adaptive Calibrated Routing ({DACR}) for {LLMs}},
+  year    = {2026},
+  version = {0.2.0},
+  url     = {https://github.com/JavadDogani/domain-adaptive-calibrated-routing}
+}
+```
+
 ## License
 
 MIT. See [LICENSE](LICENSE).
