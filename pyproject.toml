@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dacr-router"
+version = "0.2.0"
+description = "Domain-Adaptive Calibrated Routing (DACR) for LLMs: calibrated quality/cost/latency predictors, a budget-constrained contextual bandit with delayed feedback, and an evaluation harness on RouterBench."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Javad Dogani" }]
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "pyarrow>=12",
+    "scikit-learn>=1.3",
+    "matplotlib>=3.7",
+    "pyyaml>=6",
+    "tqdm>=4.60",
+    "joblib>=1.3",
+]
+
+[project.optional-dependencies]
+embed = ["sentence-transformers>=2.6"]
+data = ["huggingface_hub>=0.20"]
+profile = ["openai>=1.40"]
+dev = ["pytest>=7", "ruff>=0.5"]
+all = ["dacr-router[embed,data,profile]"]
+
+[project.urls]
+Repository = "https://github.com/JavadDogani/domain-adaptive-calibrated-routing"
+
+[project.scripts]
+dacr = "dacr.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "NPY", "SIM"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

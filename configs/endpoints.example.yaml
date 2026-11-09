@@ -1,0 +1,21 @@
+# Endpoints for `dacr profile-latency`. Any OpenAI-compatible chat-completions server works
+# (OpenAI, vLLM, Ollama, Together, ...). API keys are read from the named environment variable.
+#
+#   dacr profile-latency --endpoints configs/endpoints.yaml --prompts data/routerbench.parquet \
+#       --n-prompts 30 --out configs/latency_profiles.measured.yaml
+#
+# `name` (optional) is the model name written to the profile file; set it to the RouterBench model
+# a measured endpoint should stand in for. `token_param` is `max_completion_tokens` for current
+# OpenAI models; some servers only accept `max_tokens`.
+
+endpoints:
+  - model: gpt-4o-mini
+    base_url: https://api.openai.com/v1
+    api_key_env: OPENAI_API_KEY
+    token_param: max_completion_tokens
+
+  # - model: meta-llama/Llama-3.1-8B-Instruct
+  #   base_url: http://localhost:8000/v1      # e.g. a local vLLM server
+  #   api_key_env: VLLM_API_KEY
+  #   token_param: max_tokens
+  #   name: mistralai/mistral-7b-chat

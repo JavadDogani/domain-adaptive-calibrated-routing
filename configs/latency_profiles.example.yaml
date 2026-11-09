@@ -1,0 +1,24 @@
+# Latency profiles used by the simulator (dacr run --latency-profiles <this file>).
+#
+# latency = (ttft_s + prompt_tokens / prefill_tps + output_tokens / decode_tps) * noise * tail
+#   noise ~ LogNormal(0, jitter); with probability tail_prob a request is slowed by ~tail_mult.
+#
+# Any field you omit falls back to the built-in default for that model (see dacr/latency.py),
+# or to the `default` block for models without a built-in profile.
+# Generate measured profiles for your own endpoints with `dacr profile-latency`.
+
+default:
+  ttft_s: 0.5
+  prefill_tps: 3000
+  decode_tps: 50
+  jitter: 0.25
+  tail_prob: 0.02
+  tail_mult: 4.0
+
+models:
+  gpt-4-1106-preview:
+    ttft_s: 0.7
+    decode_tps: 25
+  mistralai/mistral-7b-chat:
+    ttft_s: 0.2
+    decode_tps: 110
